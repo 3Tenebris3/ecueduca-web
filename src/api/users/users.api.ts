@@ -28,9 +28,9 @@ export const assignTeacher = (studentId: string, teacherId: string) =>
 /* helpers para listados */
 export const listTeachers = () =>
   http
-    .get<{ data: { users: UserDTO[] } }>("/users/role/teacher")
+    .get<{ data: { users: UserDTO[] } }>("/users/by-role/teacher")
     .then((r) => r.data.data.users);
 export const listStudents = () =>
   http
-    .get<{ data: { users: UserDTO[] } }>("/users/role/student")
+    .get<{ data: { users: UserDTO[] } }>("/users/by-role/student")
     .then((r) => r.data.data.users);

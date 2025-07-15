@@ -96,7 +96,7 @@ export default function QuestionDialog({
                 {choices.map((choice, idx) => (
                   <Box
                     key={idx}
-                    sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+                    sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}
                   >
                     <FormControlLabel
                       value={idx}

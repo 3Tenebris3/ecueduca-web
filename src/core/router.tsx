@@ -9,6 +9,11 @@ import UsersTable from '../pages/users/UsersTable';
 import ClassesTable from '../pages/classes/ClassesTable';
 import QuizzesTable from '../pages/quizzes/QuizzesTable';
 import ScenariosGrid from '../pages/scenarios/ScenariosGrid';
+import MinigamesHub from '../pages/minigames/MinigamesHub';
+import TriviaTable from '../pages/trivia/TriviaTable';
+import ReportsPage from '../pages/report/ReportsPage';
+import MemorySetsPage from '../pages/memory/MemorySetsPage';
+import RewardsTable from '../pages/rewards/RewardsTable';
 
 /* ---------- Guard ---------- */
 const RequireAuth = ({ children }: { children: JSX.Element }) => {
@@ -37,8 +42,12 @@ export const AppRouter = () => (
         <Route path="classes" element={<ClassesTable />} />
         <Route path="quizzes" element={<QuizzesTable />} />
         <Route path="scenarios" element={<ScenariosGrid />} />
+        <Route path="minigames" element={<MinigamesHub />} />
+        <Route path="minigames/trivia" element={<TriviaTable />} />
+        <Route path="minigames/memory" element={<MemorySetsPage />} />
+        <Route path="reports" element={<ReportsPage />} />
+        <Route path="rewards" element={<RewardsTable />} />
 
-        {/* ...más rutas */}
       </Route>
 
       {/* catch-all */}

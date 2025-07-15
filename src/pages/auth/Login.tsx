@@ -17,12 +17,12 @@ export default function LoginPage() {
 
   const submit = handleSubmit(data => {
     login.mutate(data, { onSuccess: () => {
+      nav('/dashboard')
       notify({
         title: 'Inicio de sesión exitoso',
         description: 'Bienvenido de nuevo!',
         severity: 'success'
       });
-      nav('/dashboard')
     }, 
     onError: () => {
       notify({
@@ -45,16 +45,25 @@ export default function LoginPage() {
   const handleDemoLogin = (role: 'admin' | 'profesor') => {
     const demoCredentials =
       role === 'admin'
-        ? { email: 'admin@demo.com', password: 'admin123' }
-        : { email: 'profesor@demo.com', password: 'profesor123' };
+        ? { email: 'admin@demo.com', password: 'Password01' }
+        : { email: 'profesor@demo.com', password: 'Password01' };
 
-    login.mutate(demoCredentials, { onSuccess: () => nav('/dashboard') });
+    login.mutate(demoCredentials, { onSuccess: () => {
+      nav('/dashboard')
+      notify({
+        title: 'Inicio de sesión exitoso',
+        description: 'Bienvenido de nuevo!',
+        severity: 'success'
+      });
+    },
+    onError: () => {
+      notify({
+        title: 'Error de inicio de sesión',
+        description: 'Por favor, verifica tus credenciales.',
+        severity: 'error'
+      });
+    }});
     handleClose();
-    notify({
-      title: 'Inicio de sesión exitoso',
-      description: 'Bienvenido de nuevo!',
-      severity: 'success'
-    });
   };
 
   return (

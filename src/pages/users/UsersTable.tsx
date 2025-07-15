@@ -38,7 +38,15 @@ import type { UserDTO } from '../../api/users/users.types';
 
 export default function UsersTable() {
   /* datos */
-  const { data: rows = [] } = useUsers();
+  const { data: users = [] } = useUsers();
+
+  const rows = users.map(user => ({
+    ...user,
+    role: user.role === 'admin' ? 'Administrador' :
+          user.role === 'teacher' ? 'Profesor' :
+          user.role === 'student' ? 'Estudiante' : user.role,
+    isActive: user.isActive ? 'Sí' : 'No'
+  }));
   const delUser   = useDeleteUser();
   const assignT   = useAssignTeacher();
   const { data: teachers = [] } = useTeachers();
@@ -58,18 +66,11 @@ export default function UsersTable() {
   const cols: GridColDef[] = [
     { field: 'displayName', headerName: 'Nombre', flex: 1 },
     { field: 'email',       headerName: 'Correo', flex: 1 },
+    { field: 'role',        headerName: 'Rol',    width: 120 },
     { 
-      field: 'role',        
-      headerName: 'Rol',    
-      width: 120,
-      valueGetter: ({ value }) => {
-        switch (value) {
-          case 'admin': return 'Administrador';
-          case 'student': return 'Estudiante';
-          case 'teacher': return 'Profesor';
-          default: return 'Hola';
-        }
-      }
+      field: 'isActive', 
+      headerName: 'Activo', 
+      width: 100,
     },
     {
       field: 'actions',

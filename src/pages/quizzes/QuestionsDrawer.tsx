@@ -68,7 +68,7 @@ export default function QuestionsDrawer({ open, onClose, quiz }: Props) {
               mb: 2
             }}
           >
-            <h3 style={{ margin: 0 }}>{quiz.title}</h3>
+            <h3 style={{ margin: 0, fontFamily: "Roboto, Helvetica, Arial, sans-serif" }}>{quiz.title}</h3>
 
             <Tooltip title="Nueva pregunta">
               <IconButton
@@ -85,7 +85,7 @@ export default function QuestionsDrawer({ open, onClose, quiz }: Props) {
           <List dense>
             {qs.map((q) => (
               <ListItem key={q.id} divider>
-                <ListItemText primary={q.prompt} />
+                <ListItemText primary={q.prompt}/>
 
                 <ListItemSecondaryAction>
                   <IconButton

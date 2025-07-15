@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, Chip, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Chip, Typography } from "@mui/material";
 import {
   DataGrid,
   type GridColDef,
@@ -8,7 +8,6 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PeopleIcon from "@mui/icons-material/People";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 import { useClasses, useDeleteClass } from "../../features/classes/hooks";
 import { useTeachers } from "../../features/users/hooks";
@@ -30,45 +29,26 @@ export default function ClassesTable() {
 
   const cols: GridColDef[] = [
     { field: "name", headerName: "Nombre", flex: 1 },
-    { field: "grade", headerName: "Grado", width: 100 },
+    { field: "grade", headerName: "Grado", width: 140 },
     {
-  field: 'teacherId',
-  headerName: 'Profesor',
-  flex: 1,
-  renderCell: ({ value }) => {
-    const prof = teachers.find(t => t.id === value);
-    return prof ? prof.displayName : '—';
-  }
-},
+      field: 'teacherId',
+      headerName: 'Profesor',
+      flex: 1,
+      renderCell: ({ value }) => {
+        const prof = teachers.find(t => t.id === value);
+        return prof ? prof.displayName : '—';
+      }
+    },
     {
       field: "studentsCount",
-      headerName: "Est.",
-      width: 80,
+      headerName: "Estudiantes",
+      width: 150,
       renderCell: ({ value }) => (
         <Chip
           label={value}
           size="small"
           color={value > 0 ? "primary" : "default"}
         />
-      ),
-    },
-    {
-      field: "code",
-      headerName: "Código",
-      width: 120,
-      renderCell: ({ value }) => (
-        <Tooltip title="Copiar">
-          <Button
-            variant="text"
-            size="small"
-            endIcon={<ContentCopyIcon fontSize="small" />}
-            onClick={() => {
-              navigator.clipboard.writeText(value);
-            }}
-          >
-            {value}
-          </Button>
-        </Tooltip>
       ),
     },
     {
@@ -85,14 +65,14 @@ export default function ClassesTable() {
         <GridActionsCellItem
           key="del"
           icon={<DeleteIcon />}
-          label="del"
+          label="Eliminar"
           onClick={() => delClass.mutate(row.id)}
           showInMenu
         />,
         <GridActionsCellItem
           key="enroll"
           icon={<PeopleIcon />}
-          label="estudiantes"
+          label="Agregar Estudiantes"
           onClick={() => setDlg({ type: "enroll", classItem: row })}
           showInMenu
         />,

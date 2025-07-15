@@ -1,6 +1,7 @@
 export type Role = 'admin' | 'teacher' | 'student' | 'parent';
 
 export interface UserDTO {
+  isActive: boolean;
   id: string;
   displayName: string;
   email: string;
